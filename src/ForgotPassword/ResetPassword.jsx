@@ -70,6 +70,13 @@ const ResetPassword = () => {
     }
   }, [params, calledAuth]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
+
   const resetPassword = async () => {
     try {
       const data = await change_password({ password: password });
