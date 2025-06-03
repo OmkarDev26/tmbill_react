@@ -62,7 +62,8 @@ const ResetPassword = () => {
 
   useEffect(() => {
     if (emailRegex.test(email)) {
-      debouncedHandleUser.current();
+      // debouncedHandleUser.current();
+      handleUser();
     }
   }, [email]);
 
