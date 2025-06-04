@@ -34,9 +34,9 @@ const ResetPassword = () => {
 
   let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleUser = async () => {
+  const handleUser = async (value) => {
     try {
-      const data = await checkUser({ email: email });
+      const data = await checkUser({ email: value });
       if (data?.user == true) {
         setUserFound(false);
       }
@@ -55,15 +55,14 @@ const ResetPassword = () => {
   }, [c_password]);
 
   useEffect(() => {
-    debouncedHandleUser.current = debounce(() => {
-      handleUser();
+    debouncedHandleUser.current = debounce((email) => {
+      handleUser(email);
     }, 1000);
   }, []);
 
   useEffect(() => {
     if (emailRegex.test(email)) {
-      // debouncedHandleUser.current();
-      handleUser();
+      debouncedHandleUser.current(email);
     }
   }, [email]);
 
